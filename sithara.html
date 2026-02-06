@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #b30059;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 40px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        #yesBtn {
+            background-color: #28a745;
+            color: white;
+            position: relative;
+            left: -100px;   
+        }
+
+        #noBtn {
+            background-color: #dc3545;
+            color: white;
+            position: fixed;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will You Be My Valentine? 🌹</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="window.location.href='sithara3.html'">
+            Yes 💕
+        </button>
+
+        <button id="noBtn">No 💔</button>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+
+        const yesBtn = document.getElementById("yesBtn");
+        const yesRect = yesBtn.getBoundingClientRect();
+        const noRect = noBtn.getBoundingClientRect();
+
+        noBtn.style.left = (yesRect.right - yesRect.left + yesRect.left + 100) + "px";
+        noBtn.style.top = yesRect.top + "px";
+        noBtn.style.transform = "none";
+
+
+        let startTime = null;
+
+        document.addEventListener("mousemove", (e) => {
+            const rect = noBtn.getBoundingClientRect();
+
+            const dx = Math.abs(e.clientX - (rect.left + rect.width / 2));
+            const dy = Math.abs(e.clientY - (rect.top + rect.height / 2));
+
+            if (dx < 100 && dy < 60) {
+
+                if (!startTime) {
+                    startTime = Date.now();
+                }
+
+                const elapsed = Date.now() - startTime;
+
+                if (elapsed >= 4000) {
+                    window.location.href = "sithara2.html";
+                }
+
+                const x = Math.random() * (window.innerWidth - rect.width);
+                const y = Math.random() * (window.innerHeight - rect.height);
+
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+            }
+        });
+    </script>
+
+
+</body>
+</html>
